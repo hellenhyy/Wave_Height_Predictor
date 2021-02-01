@@ -1,0 +1,9 @@
+# Wave_Height_Predictor
+
+In Lake Michigan, wave heights were routinely collected at two buoy stations maintained by NOAA. In order to forecast the wave heights for the whole lake, a traditional physics-based wave model was used to calculate wave heights based on wind information like wind speed, wind direction and ice cover etc. The entire lake was discretized into 3892 grid points and the wave height was calculated at every grid point by a time interval of 3 hours. It was extremely time-consuming to simulate wave heights for a decadal timeframe. It took about 4~5 hours to predict 1-year wave height.
+
+A Multi-Layer Perceptron (MLP) model was developed to accelerate wave forecasting. The wave heights between year 2005-2012 produced by the physics-based wave model were utilized as a training dataset to train the model. The wave height data of year 2013-2014 and year 2015 were used to validate and test the MLP model. Two hidden layers with 300 neurons in each layer were adopted in the MLP architecture. The MLP model could significantly speed up the wave forecasting and predicted wave heights for a year within a second. 
+
+The python script "wavesimulator_tensorflow.py" builds the MLP model using TensorFlow. It creates a WaveSimulator class for model training, validation and testing. The python script "wave_height.py" is to prepare the datasets, call the WaveSimulator class and postprocess the results.
+
+The wave height predictions in year 2015 from the physics-based wave model and MLP model were compared. High accuracy was achieved with coefficient of determinant R2 = 0.92, root-mean-square-error RMSE = 0.13m, and Bias = -0.014m. Using the same number of cores, it took 4.5h for the physics-based model while less than 1 second for the MLP model to forecast wave heights for a year.
